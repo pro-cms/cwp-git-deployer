@@ -1,0 +1,72 @@
+$("#btn_deploy").submit(function (e){
+    e.preventDefault();
+    var formData = $(this).serialize(); 
+    $.ajax({ 
+        type: "POST", 
+        url: "./{{users}}/index.php?module=deploymodule&acc=addRepo",
+        data: formData,
+        dataType: "json",
+        success: function(data){
+            if(data.success){
+                toastr.success(data.success);
+                // Reset the form
+                $("#btn_deploy")[0].reset();
+                // Append the new row at the top of the table
+                $("table tbody").html(data.table_rows);
+            }
+            if(data.error){
+                toastr.error(data.error);
+            }
+        },
+        error: function(error){
+            toastr.error('There was an error processing your request');
+        }
+    });
+    
+    return false;
+});
+
+$("table").on("click", "button.btn-danger", function() {
+    var key = $(this).data('key');
+    var confirm_delete = confirm("Are you sure you want to delete?");
+    if(confirm_delete){
+  
+    $.ajax({
+        type: "POST",
+        url: "./{{users}}/index.php?module=deploymodule&acc=delete",
+        data: {
+            'key': key
+        },
+        dataType: "json",
+        success: function(response) {
+            if (response.success) {
+                toastr.success(response.success);
+                window.location.reload();
+                $(this).parent().parent().remove();
+            } else if (response.error) {
+                toastr.error(response.error);
+            }
+        }
+    });
+          
+    }
+});
+$("table").on("click", "button.btn-success", function() {
+    var key = $(this).data('key');
+
+    $.ajax({
+        type: "POST",
+        url: "./{{users}}/index.php?module=deploymodule&acc=deploy",
+        data: {
+            'key': key
+        },
+        dataType: "json",
+        success: function(response) {
+            if (response.success) {
+                toastr.success(response.success);
+            } else if (response.error) {
+                toastr.error(response.error);
+            }
+        }
+    });
+});
