@@ -1,6 +1,8 @@
 $("#btn_deploy").submit(function (e){
     e.preventDefault();
     var formData = $(this).serialize(); 
+      $('.overlay').show();
+
     $.ajax({ 
         type: "POST", 
         url: "./{{users}}/index.php?module=deploymodule&acc=addRepo",
@@ -8,13 +10,16 @@ $("#btn_deploy").submit(function (e){
         dataType: "json",
         success: function(data){
             if(data.success){
+                    $('.overlay').hide();
                 toastr.success(data.success);
                 // Reset the form
                 $("#btn_deploy")[0].reset();
                 // Append the new row at the top of the table
+                window.location.reload();
                 $("table tbody").html(data.table_rows);
             }
             if(data.error){
+                    $('.overlay').hide();
                 toastr.error(data.error);
             }
         },
@@ -30,7 +35,8 @@ $("table").on("click", "button.btn-danger", function() {
     var key = $(this).data('key');
     var confirm_delete = confirm("Are you sure you want to delete?");
     if(confirm_delete){
-  
+    $('.overlay').show();
+
     $.ajax({
         type: "POST",
         url: "./{{users}}/index.php?module=deploymodule&acc=delete",
@@ -39,6 +45,7 @@ $("table").on("click", "button.btn-danger", function() {
         },
         dataType: "json",
         success: function(response) {
+                $('.overlay').hide();
             if (response.success) {
                 toastr.success(response.success);
                 window.location.reload();
@@ -51,8 +58,12 @@ $("table").on("click", "button.btn-danger", function() {
           
     }
 });
+
 $("table").on("click", "button.btn-success", function() {
     var key = $(this).data('key');
+
+    // Show the overlay
+    $('.overlay').show();
 
     $.ajax({
         type: "POST",
@@ -62,11 +73,32 @@ $("table").on("click", "button.btn-success", function() {
         },
         dataType: "json",
         success: function(response) {
+            // Hide the overlay
+            $('.overlay').hide();
+
             if (response.success) {
                 toastr.success(response.success);
             } else if (response.error) {
                 toastr.error(response.error);
             }
+        },
+        error: function(error) {
+            // Hide the overlay in case of an error
+            $('.overlay').hide();
+
+            toastr.error('There was an error processing your request');
         }
     });
+});
+
+
+$(".copy-public-key-btn").click(function() {
+    var publicKey = $(this).data('public-key');
+    navigator.clipboard.writeText(publicKey)
+        .then(function() {
+            toastr.success('Public key copied to clipboard');
+        })
+        .catch(function(error) {
+            toastr.error('Failed to copy public key: ' + error);
+        });
 });

@@ -18,6 +18,37 @@
     min-height: 1px;
     padding: 1.25rem;
   }
+
+  .overlay {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255,255,255,0.8);
+    z-index: 10;
+}
+
+.loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px #1a7bb9;
+    border-right: 16px solid #18a689;
+    border-bottom: 16px solid #ed5565;
+    border-left: 16px solid 1a7bb9;
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
 </style>
   
 <div class="row  border-bottom white-bg dashboard-header"  id="upheader">
@@ -33,14 +64,16 @@
         <h2>{{langmod.ADDDTLASW}} ({{users}})</h2>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="?">Home</a></li>
-            <li class="breadcrumb-item active"><strong>{{langmod.ADDDTLASW}}</strong></li>
-            <li class="breadcrumb-item active"><strong>{{mod.addons_mod}}</strong></li>
+            <li class="breadcrumb-item active"><strong>Deploy</strong></li>
+            <li class="breadcrumb-item active"><strong>Github</strong></li>
 
         </ol>
     </div>
 </div>
 <br>
-  
+<div class="ibox-title">
+    <div id="_step_title_container"><h4>Deploy from github</h4></div>
+</div>
 <div class="card p-2 bg-white  m-2 shadow-sm">
   <div class="container">
 
@@ -50,19 +83,19 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="">Repository</label>
-                    <input type="text" class="form-control" name="repository">
+                    <input type="text" class="form-control" name="repository" placeholder="git@github.com:username/repository.git	">
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="">Branch</label>
-                    <input type="text" class="form-control" name="branch">
+                    <input type="text" class="form-control" name="branch" placeholder="master">
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="">Directory</label>
-                    <input type="text" class="form-control" name="directory">
+                    <input type="text" class="form-control" name="directory" placeholder="public_html">
                 </div>
             </div>
             <div class="col-md-3">
@@ -96,5 +129,8 @@
             </tbody>
         </table>
     </div>
-
+    <div class="overlay">
+        <div class="loader"></div>
+    </div>
+    
 </div>

@@ -1,0 +1,561 @@
+{% if mod.name != 'softaculous' %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{% if mod.license == 1%}{{mod.custom_title}}  CWPpro.user {% else %}{{mod.custom_title}}{{langene.TITLETAG}}{% endif %} [{{users}}]</title>
+    <link href="{{url}}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{url}}/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <!-- Toastr style -->
+    <link href="{{url}}/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <!-- Gritter -->
+    <link href="{{url}}/js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
+    <link href="{{url}}/css/animate.css" rel="stylesheet">
+    <link id="ccsmain" href="{{url}}/css/{{mod.style}}.css" rel="stylesheet">
+    <link href="{{url}}/css/plugins/switchery/switchery.css" rel="stylesheet">
+    <link href="{{url}}/css/plugins/ladda/ladda-themeless.min.css" rel="stylesheet">
+    <link href="{{url}}/css/plugins/dataTables/datatables.min.css" rel="stylesheet">
+    <link href="{{url}}/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="{{url}}/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
+    {% if mod.name =='phpini_editor' or mod.name == 'mod_security'%}
+        <link href="{{url}}/css/plugins/codemirror/codemirror.css" rel="stylesheet">
+        <link href="{{url}}/css/plugins/codemirror/ambiance.css" rel="stylesheet">
+    {% endif %}
+    {% if mod.name =='mail_autoreply' %}
+        <link href="{{url}}/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+        <link href="{{url}}/css/plugins/clockpicker/clockpicker.css" rel="stylesheet">
+        <link href="{{url}}/css/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet">
+        <link href="{{url}}/css/plugins/summernote/summernote.css" rel="stylesheet">
+    {% endif %}
+    {% if mod.name =='crontab' or mod.name == 'mysql_manager'%}
+
+        <!-- <link href="{{url}}/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet"> -->
+    {% endif %}
+    {% if mod.name == 'email_accounts' or mod.name =='sslwizard' or mod.name =='email_filters' or mod.name =='forwarders_email' %}
+    <link href="{{url}}/css/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet">
+    {% endif %}
+    {% if mod.name =='sslwizard' or mod.name == 'mysql_manager' or mod.name == 'email_importer' or mod.name == 'nodejs_manager' or mod.name == 'postgresql_manager' or mod.name == 'tomcat_manager'%}
+    <link href="{{url}}/css/plugins/select2/select2.min.css" rel="stylesheet">
+    {% endif %}
+    {% if mod.name =='email_importer'%}
+    <link href="{{url}}/css/plugins/dropzone/basic.css" rel="stylesheet">
+    <link href="{{url}}/css/plugins/dropzone/dropzone.css" rel="stylesheet">
+    {% endif %}
+    {% if mod.name =='reseller' %}
+        <link href="{{url}}/css/plugins/dualListbox/bootstrap-duallistbox.min.css" rel="stylesheet">
+        <link href="{{url}}/css/plugins/dropzone/basic.css" rel="stylesheet">
+        <link href="{{url}}/css/plugins/dropzone/dropzone.css" rel="stylesheet">
+    {% endif %}
+    <!-- c3 Charts -->
+    <link href="{{url}}/css/plugins/c3/c3.min.css" rel="stylesheet">
+    <link href="{{url}}/css/plugins/chartist/chartist.min.css" rel="stylesheet">
+
+    <link rel="icon" href="{{url}}/img/ico/favicon.ico" type="image/png">
+    {% if mod.name =='Dashboard' %}
+        <link rel="stylesheet" href="{{url}}/font-awesome/css/fontawesome-all.css">
+        <link href="{{url}}/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+    {% endif %}
+
+    {% if mod.name =='servercast' %}
+        <link href="{{url}}/css/dropzone.css" rel="stylesheet">
+    {% endif %}
+
+    <cwp-styles></cwp-styles>
+    <style media="screen">
+      .radio label::after {
+        top:5px;
+      }
+      .radio label::before {
+        top: 2px;
+      }
+      .radio-lang{
+        cursor: pointer;
+      }
+      .li-item-lang{
+        border-bottom: 1px solid #f3f3f4;
+      }
+      .li-item-lang .lang-col-item:not(:nth-child(3n)){
+        border-right: 1px solid #f3f3f4;
+      }
+      .lang-items-wrapper{
+        width:320px !important;
+      }
+      .info-left-item{
+        color: #ccc;
+      }
+      .error-pass-account{
+        color: #ff0000;
+        margin-top: 5px;
+        font-size: 12px;
+        display: block;
+      }
+    </style>
+    <!-- PASS CHANGER STYLES -->
+    <style media="screen">
+      .modal-passchanger{
+        width: 450px;
+      }
+      .modal-passchanger .pass1-div{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+      .modal-passchanger .form-group{
+        width: 62%;
+        margin-bottom: 0px;
+      }
+      .modal-passchanger .pass-generator{
+        padding-top: 2.5rem;
+      }
+      .pwstrength_viewport_progress .progress{
+        margin-bottom: 5px;
+        margin-top: 5px;
+        border: 1px solid #e7eaec;
+      }
+      .pwstrength_viewport_progress .password-verdict{
+        color: #333333;
+      }
+    </style>
+    <!-- PASS CHANGER STYLES -->
+    <!-- TOP NOTIFICATIONS STYLES -->
+    <style media="screen">
+          .tooltip-inner {
+          min-width: 100px;
+          max-width: 100%;
+      }
+      .cwp-notifications{
+        padding: 0px;
+        max-height: 45vh;
+        overflow: auto;
+        width: 400px !important;
+      }
+      .cwp-notifications .dropdown-divider{
+        border-bottom: 1px solid #eee;
+      }
+      .cwp-notifications a{
+        padding: 3px 10px !important;
+      }
+      .cwp-notifications a i{
+        margin-right: 5px;
+      }
+      .cwp-notifications a{
+        font-size: 1.2rem !important;
+      }
+      .cwp-notifications a .unread{
+        font-weight: bold;
+        color: #f8ac59;
+      }
+      .sub-notify{
+        display: none;
+        padding-left: 0px;
+        border-top: 1px solid #f3f3f3;
+        background-color: #fbfbfb;
+      }
+      .sub-notify-item{
+        padding: 5px 15px;
+      }
+      .sub-notify-item.websitechange span,
+      .sub-notify-item.diskusage span,
+      .sub-notify-item.emailquota span{
+        display: block;
+      }
+      #loader_noti_page{
+        display: none;
+      }
+      .menu-left-storage-btn{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0px;
+      }
+      .menu-left-storage-btn h5{
+        margin: 0px;
+      }
+      .menu-left-storage{
+        margin-top: 5px;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #778494;
+      }
+      #divstorage_info{
+        display: none;
+      }
+      #divstorage_info .fa,
+      #divstorage_info .stat,
+      #divstorage_info .percent{
+        color: #dddddd;
+      }
+      #divstorage_loader{
+        height: 85px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #divstorage_loader .fa{
+        color: #f5f5f5;
+        font-size: 3rem;
+      }
+      #sw{
+        color: #ffffff;
+      }
+      .divstorage-item-title{
+        color: #f5f5f5;
+        margin-left: 5px;
+        font-size: 1.3rem;
+      }
+    </style>
+    <!-- TOP NOTIFICATIONS STYLES -->
+</head>
+<body>
+    <div id="wrapper">
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav metismenu" id="side-menu">
+                    {% if mod.html == 'locked_update.html' %}
+                        {% include 'menu_locked.html' %}
+                    {% else %}
+                        {% include 'menu_left.html' %}
+                    {% endif %}
+
+                </ul>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+            <div class="row border-bottom">
+                <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                    <div class="navbar-header">
+                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                        <form role="search" class="navbar-form-custom" action="#">
+                            <div class="form-group">
+                                <input type="text" placeholder="{{langene.GNLABEL44}}" class="form-control" name="top-search" id="top-search" autofocus>
+                            </div>
+                        </form>
+                    </div>
+
+                    <ul class="nav navbar-top-links navbar-right">
+                        <li>
+                            {% if mod.fa2 == 1%} <span style="margin-right: 20px;font-weight: bold"><i class="glyphicon glyphicon-phone" style="color:green"></i> 2FA</span> {% endif %}
+                            <span data-toggle="dropdown" class="dropdown-toggle m-r-sm text-muted welcome-message" style="cursor:pointer">
+                                <i class="fa fa-user" aria-hidden="true"></i> {{users}} <span class="label label-success newtost" id="showleftbottom"><i class="fa fa-bell"></i> New</span></span>
+                            <ul class="dropdown-menu animated fadeIn m-t-xs">
+                                <li><a href="#" data-toggle="modal"  data-target="#modal-changepass">{{langene.CHANGEPASS}}</a></li>
+                                <li><a href="#" data-toggle="modal"  data-target="#modal-settings">{{langene.GNLABLE10}}  <i class="fa fa-bell text-success"></i></a></li>
+                                <!-- <li class="divider"></li>
+                                <li><a href="#" class="logon">{{langene.BTN_LOGOUT}}</a></li> -->
+                            </ul>
+                        </li>
+                        {% if mod.reseller ==1%}
+                        <li>
+                            <a href="#" class="reseller"><span id="labelreseller" class="label label-primary float-right">{{langene.GNLABEL37}}</span></a>
+                        </li>
+                        {% endif %}
+
+                        {% if mod.fsl == 0 %}
+                            {% set clasefl = 'label-warning' %}
+                            {% set titlefl = langene.FSL_UNLOCKED %}
+                        {% else %}
+                            {% set clasefl = 'label-success' %}
+                            {% set titlefl = langene.FSL_LOCKED %}
+                        {% endif %}
+                        <li>
+                            <a href="#" class="files_system_lock" id="btnfilelock"><span id="imglock" class="label {{clasefl}} float-right">{{titlefl}}</span></a>
+                        </li>
+
+
+                        <!-- <li class="dropdown" id="bansw">
+                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">&nbsp;</a>
+                        </li> -->
+                        {% include 'top_notifications.html' %}
+                        <li class="dropdown">
+                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                                <!--i class="fa fa-flag"></i-->
+                                <img src="{{url}}/img/{{lang}}.png" width="20" style="margin-right: 15px">
+                            </a>
+                            <ul class="dropdown-menu dropdown-alerts lang-items-wrapper">
+                              {% set sw = 0 %}
+                              {% for key in array_lang %}
+                                {% if key !='.' and key !='..'%}
+                                  {% if ( sw % 3 ) == 0%}
+                                    <li class="li-item-lang">
+                                      <div class="row">
+                                  {% endif %}
+
+                                  <div class="col-md-4 lang-col-item">
+                                    {% if key == lang %}
+                                      {% set ischecked = 'checked' %}
+                                    {% else %}
+                                      {% set ischecked = '' %}
+                                    {% endif %}
+                                    <div class="radio radio-primary radio-lang">
+                                      <input type="radio" name="lang" class="radio radio-danger" {{ischecked}}  value="{{key}}" id="lang_item_{{key}}" onchange="return save_lang()">
+                                      <label for="lang_item_{{key}}"><img src="{{url}}/img/{{key}}.png" data-src="{{url}}/img/{{key}}.png" width="20" style="margin-right: 15px">{{key|capitalize}}</label>
+                                    </div>
+                                  </div>
+
+                                  {% set sw = sw + 1 %}
+                                  {% if (sw % 3) == 0%}
+                                      </div>
+                                    </li>
+                                  {% endif %}
+                                {% endif %}
+                              {% endfor %}
+                              {% if (sw % 3) != 0%}
+                                  </div>
+                                </li>
+                              {% endif %}
+                            </ul>
+                        </li>
+                        {% if mod.viewtheme == 0 %}
+                        <li class="dropdown">
+                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                                <i class="fa fa-gears"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-alerts">
+                                {% for key in array_theme %}
+                                    {% if key !='.' and key !='..' %}
+                                        <li>
+                                            <a href="#">
+                                                <div>
+                                                    <div class="row">
+                                                        <table class="col-lg-offset-1 col-lg-11">
+                                                            <tr>
+                                                                <td><img src="/{{users}}/cwp_theme/{{key}}/img/{{key}}.png" width="100"></td>
+                                                                <td><div>{{key}}</div></td>
+                                                                <td>
+                                                                    <div class="radio radio-danger">
+                                                                        {% if key == theme %}
+                                                                            <input type="radio" name="theme-save" class="radio radio-danger" checked  value="{{key}}" style="margin-top: -10px">
+                                                                        {% else %}
+                                                                            <input type="radio" name="theme-save" class="radio radio-danger"  value="{{key}}" style="margin-top: -10px">
+                                                                        {% endif %}
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                                <li class="divider"></li>
+                                <li>
+                                    <div class="pull-right">
+                                        <button class="btn btn-success btn-xs" id="btn-save-theme">{{langene.PGCHANGTHEME}}</button>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        {% endif %}
+                        {% if mod.styles != '' %}
+                        <li class="dropdown">
+                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                                <i class="fa fa-paint-brush"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-alerts">
+                                {% for styles in mod.styles %}
+                                <li>
+                                    <div class="setings-item">
+                                        <span>
+                                            <div class="row">
+                                                <div class="col-lg-6"><img alt="" id="logomenu" src="{{url}}/img/{{styles.pic}}" width="100" style="margin-right: 15px;border-radius: 0.25em; border: 1px"></div>
+                                                <div class="col-lg-4">{{styles.name}}</div>
+                                                <div class="col-lg-2">
+                                                    <div class="switch">
+                                                        <div class="onoffswitch">
+                                                            <input type="checkbox" name="collapsemenu" class="onoffswitch-checkbox" id="collapsemenu{{styles.name}}" onchange="return changestyles()">
+                                                            <label class="onoffswitch-label" for="collapsemenu{{styles.name}}">
+                                                                <span class="onoffswitch-inner"></span>
+                                                                <span class="onoffswitch-switch"></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </div>
+                                </li>
+                                <li class="divider"></li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        {% endif %}
+                        <li>
+                            <a href="{{mod.linkhelpmod}}" target="_blank"><i class="fa fa-question-circle fa-2x"></i></a>
+                        </li>
+                        <li>
+                            <a href="#}" onclick="return logon()"><i class="fa fa-power-off"></i> {{langene.BTN_LOGOUT}}</a>
+                        </li>
+                    </ul>
+
+                </nav>
+            </div>
+            {% include mod.html %}
+        </div>
+    </div>
+    {% include 'modal_tools.html' %}
+
+    </div>
+
+    <!-- Mainly scripts -->
+    <script src="{{url}}/js/jquery-3.1.1.min.js"></script>
+    <!-- jQuery UI -->
+    <script src="{{url}}/js/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script src="{{url}}/js/popper.min.js"></script>
+    <script src="{{url}}/js/bootstrap.js"></script>
+    <script src="{{url}}/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="{{url}}/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    {% if mod.name == 'email_accounts' or mod.name == 'mysql_manager' or mod.name =='sslwizard' or mod.name =='email_filters' or mod.name =='forwarders_email' %}
+    <script src="{{url}}/js/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
+    {% endif %}
+    <script src="{{url}}/js/plugins/pwstrength/pwstrength-bootstrap.min.js"></script>
+    <script src="{{url}}/js/plugins/pwstrength/zxcvbn.js"></script>
+    <!-- Flot -->
+    <script src="{{url}}/js/plugins/flot/jquery.flot.js"></script>
+    <script src="{{url}}/js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+    <script src="{{url}}/js/plugins/flot/jquery.flot.spline.js"></script>
+    <script src="{{url}}/js/plugins/flot/jquery.flot.resize.js"></script>
+    <script src="{{url}}/js/plugins/flot/jquery.flot.pie.js"></script>
+    <script src="{{url}}/js/plugins/flot/jquery.flot.time.js"></script>
+    <!-- Peity -->
+    <script src="{{url}}/js/plugins/peity/jquery.peity.min.js"></script>
+    <script src="{{url}}/js/demo/peity-demo.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="{{url}}/js/inspinia.js"></script>
+    <script src="{{url}}/js/plugins/pace/pace.min.js"></script>
+
+    <!-- GITTER -->
+    <script src="{{url}}/js/plugins/gritter/jquery.gritter.min.js"></script>
+
+    <!-- Sparkline -->
+    <script src="{{url}}/js/plugins/sparkline/jquery.sparkline.min.js"></script>
+
+    <!-- Sparkline demo data  -->
+    <script src="{{url}}/js/demo/sparkline-demo.js"></script>
+
+    <!-- ChartJS-->
+    <script src="{{url}}/js/plugins/chartJs/Chart.min.js"></script>
+
+    <!-- Toastr -->
+    <script src="{{url}}/js/plugins/toastr/toastr.min.js"></script>
+
+    <script src="{{url}}/js/plugins/switchery/switchery.js"></script>
+
+    <!-- Ladda -->
+    <script src="{{url}}/js/plugins/ladda/spin.min.js"></script>
+    <script src="{{url}}/js/plugins/ladda/ladda.min.js"></script>
+    <script src="{{url}}/js/plugins/ladda/ladda.jquery.min.js"></script>
+
+    <script src="{{url}}/js/plugins/dataTables/datatables.min.js"></script>
+
+    {% if mod.name =='phpini_editor' or mod.name == 'mod_security'%}
+        <script src="{{url}}/js/plugins/typehead/bootstrap3-typeahead.min.js"></script>
+        <script src="{{url}}/js/plugins/codemirror/codemirror.js"></script>
+        <script src="{{url}}/js/plugins/codemirror/mode/javascript/javascript.js"></script>
+    {% endif %}
+    {% if mod.name =='mail_autoreply' %}
+    <script src="{{url}}/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+    <script src="{{url}}/js/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+    <script src="{{url}}/js/plugins/clockpicker/clockpicker.js"></script>
+    <script src="{{url}}/js/plugins/daterangepicker/daterangepicker.js"></script>
+    <script src="{{url}}/js/plugins/summernote/summernote.min.js"></script>
+    {% endif %}
+    {% if mod.name =='backups' %}
+    <script src="{{url}}/js/plugins/flot/jquery.flot.js"></script>
+    <script src="{{url}}/js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+    <script src="{{url}}/js/plugins/flot/jquery.flot.resize.js"></script>
+    <script src="{{url}}/js/plugins/flot/jquery.flot.pie.js"></script>
+    <script src="{{url}}/js/plugins/flot/jquery.flot.time.js"></script>
+
+    {% endif %}
+    {% if mod.name =='reseller' %}
+        <script src="{{url}}/js/plugins/dualListbox/jquery.bootstrap-duallistbox.js"></script>
+        <script src="{{url}}/js/plugins/dropzone/dropzone.js?v=1.1"></script>
+    {% endif %}
+    {% if mod.name =='email_importer' %}
+        <script src="{{url}}/js/plugins/dropzone/dropzone.js?v=1.1"></script>
+    {% endif %}
+    {% if mod.name =='sslwizard' or mod.name == 'mysql_manager' or mod.name == 'email_importer' or mod.name == 'nodejs_manager' or mod.name == 'postgresql_manager' or mod.name == 'tomcat_manager' %}
+        <script src="{{url}}/js/plugins/select2/select2.full.min.js" defer></script>
+    {% endif %}
+    <script src="{{url}}/js/plugins/iCheck/icheck.min.js"></script>
+
+    {% if mod.name =='Dashboard' %}
+    <script src="{{url}}/js/plugins/d3/d3.min.js"></script>
+    <script src="{{url}}/js/plugins/c3/c3.min.js"></script>
+    <script src="{{url}}/js/plugins/chartist/chartist.min.js"></script>
+    <script src="{{url}}/js/plugins/morris/raphael-2.1.0.min.js"></script>
+    <script src="{{url}}/js/plugins/morris/morris.js"></script>
+    {% endif %}
+    <script src="{{url}}/js/plugins/moment/moment.js"></script>
+    <cwp-scripts></cwp-scripts> 
+    <script> 
+        $(document).ready(function() {
+            {% if mod.name !='Dashboard' %}
+                {{ include('/js/dready.js.twig') }}
+
+            {% endif %}
+
+            $("#pass1").keyup(function() {
+                var color1=0;
+                var color2=0;
+                var color3=0;
+                var color4=0;
+                var classpar='';
+                var msj='';
+                // set password variable
+                var pswd = $(this).val();
+                //validate the length
+                if(pswd.length<8){ color1=0;}else{ color1=1; msj=msj+' largo 1';  }
+                //validate letter
+                if(pswd.match(/[A-z]/gi)){color2=1; msj=msj+' letras 1'; }else{ color2=0;}
+                //validate capital letter
+                if(pswd.match(/[A-Z]/gi)){ msj=msj+' Mayusculas 1'; color3=1; } else { color3=0; }
+                //validate number
+                if (pswd.match(/[0-9]/gi)){color4=1; msj=msj+' Numeros 1';}else{  color4=0; }
+                // newvalidpass($("#pass1").val(),$("#pass2").val());
+                var sum=(color1+color2+color3+color4);
+                //alert(sum+' M:'+msj);
+                if(sum==0){ classpar='progress-bar-danger';}
+                if(sum==1){ classpar='progress-bar-warning';}
+                if(sum==2){ classpar='progress-bar-danger';}
+                if(sum==3){ classpar='progress-bar-info';}
+                if(sum==4){ classpar='progress-bar-success';}
+                var barra='<div class="progress-bar '+classpar+'" style="width: '+((pswd.length)*10)+'%;"></div>';
+                $("#progresspass").html(barra);
+            });
+        });
+        //****** INCLUDOS JS MOD /js/modules/{{mod.name}}.js.twig *****///
+        {% if mod.name !='' %}
+            /////-----///
+            {% include("/js/modules/"~ mod.name ~".js.twig") %}
+            /////-----///
+        {% endif %}
+
+        {{ include('/js/top_notifications.js.twig') }}
+        {{ include('/js/cwp.js.twig') }}
+        function changestyles(){
+            //onoffswitch-checkbox
+            $.ajax({
+                type: "POST",
+                url: "./{{users}}/index.php?acc=changestyles",
+                complete: function(datos){
+                    console.log(datos.responseText);
+                    var stiles =datos.responseText;
+                    $(".onoffswitch-checkbox").attr("checked",false);
+                    $("#collapsemenu"+stiles).attr("checked",true);
+                    $("#ccsmain").attr("href","{{url}}/css/"+stiles+".css");
+                    return false;
+                }
+            });
+            return false;
+        }
+
+    </script>
+</body>
+</html>
+{% endif %}
