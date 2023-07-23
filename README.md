@@ -15,7 +15,7 @@ This module is designed to aid in the deployment of websites from GitHub to a Ce
 
 ## Usage
 
-After installation, go to your CWP panel and navigate to the newly installed module. Here, enter your GitHub repository name, branch, and the directory that you want to add to your website.
+After installation, go to your CWP User panel , Go to file manager select Github Deploy and navigate to the newly installed module. Here, enter your GitHub repository name, branch, and the directory that you want to add to your website.
 
 The module will generate a private key for you to use as a deploy key on GitHub. Click on the 'Copy' button to copy this key.
 
