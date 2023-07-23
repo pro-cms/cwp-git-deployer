@@ -4,6 +4,7 @@
 
 This module is designed to aid in the deployment of websites from GitHub to a CentOS Web Panel (CWP). It requires the user to enter their repository name, branch, and the directory to be added, which will be saved in their home directory as `deploydatabase.json`.
 
+CWP FORUM THREAD : ([CWP FORUM](http://forum.centos-webpanel.com/index.php?topic=12981.msg44860#msg44860))
 ![Module Image](./module.png)
 
 ## Installation
