@@ -29,7 +29,7 @@ Once you've added the deploy key, your website files will be fetched from your G
 
 ## Contribution & Support
 
-This module is open for contributions. If you find it useful, consider supporting the development through a sponsorship, or you can [Buy Me A Coffee](https://www.buymeacoffee.com/).
+This module is open for contributions. If you find it useful, consider supporting the development through a sponsorship, or you can [BUY ME A COFFEE](https://www.buymeacoffee.com/novaprocms).
 
 Current sponsor: Zepson Hosting ([zepsohost.com](https://www.zepsonhost.com))
 
